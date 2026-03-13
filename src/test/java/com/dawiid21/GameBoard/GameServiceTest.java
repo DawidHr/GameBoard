@@ -19,4 +19,23 @@ class GameServiceTest {
         gameService.addGame("Team C", "Team B");
         assertEquals(2, gameService.getGames().size());
     }
+
+    @Test
+    void finishGameTest() {
+        gameService = new GameService();
+        gameService.addGame("Team A", "Team B");
+        long gameId = gameService.getGames().get(0).getGameId();
+        assertTrue(gameService.isGameExistAndIsInProgress(gameId));
+        gameService.finishGame(gameId);
+        assertFalse(gameService.isGameExistAndIsInProgress(gameId));
+    }
+
+    @Test
+    void finishGameNotExistsTest() {
+        gameService = new GameService();
+        gameService.addGame("Team A", "Team B");
+        long gameId = -1L;
+        gameService.finishGame(gameId);
+        assertEquals(1, gameService.getGamesInProgress().size());
+    }
 }

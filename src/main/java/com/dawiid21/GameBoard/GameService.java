@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameService {
-    List<Game> games = new ArrayList<>();
+    private List<Game> games = new ArrayList<>();
 
     public void addGame(String homeTeam, String awayTeam) {
         Game game = new Game(homeTeam, awayTeam);
