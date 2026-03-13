@@ -1,5 +1,6 @@
 package com.dawiid21.GameBoard;
 
+import com.dawiid21.GameBoard.model.MainBoard;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -7,7 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class GameBoardApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GameBoardApplication.class, args);
+		MainBoard mainBoard = new MainBoard();
+		mainBoard.start();
+		//SpringApplication.run(GameBoardApplication.class, args);
 	}
 
 }
