@@ -2,13 +2,13 @@ package com.dawiid21.GameBoard;
 
 import com.dawiid21.GameBoard.model.Game;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleUI {
-    private Scanner scanner = new Scanner(System.in);
-    private GameService gameService = new GameService();
+    private final Scanner scanner = new Scanner(System.in);
+    private final GameService gameService = new GameService();
 
 
     public void start() {
@@ -31,7 +31,7 @@ public class ConsoleUI {
                     break;
                 }
                 case 4: {
-                    System.out.println("Wybrałeś 4");
+                    getSummaryGames();
                     break;
                 }
                 default: {
@@ -95,6 +95,14 @@ public class ConsoleUI {
             gameService.updateScore(gameIdToUpdate, teamToUpdate, 1);
         } else {
             System.out.println("The game with the given id does not exist");
+        }
+    }
+
+    public void getSummaryGames() {
+        System.out.println("Action Selected: Get Summary Games");
+        LinkedList<Game> gamesInProgress = gameService.getSummaryGames();
+        for (Game game : gamesInProgress) {
+            System.out.println("id: " + game.getGameId() + ". " + game.getHomeTeam() + " - " + game.getAwayTeam() + ": " + game.getHomeTeamScore() + "-" + game.getAwayTeamScore());
         }
     }
 }
