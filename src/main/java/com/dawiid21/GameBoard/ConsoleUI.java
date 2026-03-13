@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class ConsoleUI {
     private Scanner scanner = new Scanner(System.in);
     private GameService gameService = new GameService();
-    List<Game> games = new ArrayList<>();
+
 
     public void start() {
         while(true) {
@@ -46,7 +46,7 @@ public class ConsoleUI {
     public void showGameBoard() {
         System.out.println("========================================================================");
         System.out.println("Games in progress");
-        List<Game> gameInProgress = games.stream().filter(Game::isGameInProgress).toList();
+        List<Game> gameInProgress = gameService.getGamesInProgress();
         for(Game game: gameInProgress) {
             System.out.println("id: "+game.getGameId()+". "+game.getHomeTeam()+" - "+game.getAwayTeam()+": "+ game.getHomeTeamScore()+"-"+game.getAwayTeamScore());
         }
@@ -72,47 +72,27 @@ public class ConsoleUI {
         System.out.println("Please provide away team");
         String awayTeam = scanner.next();
         System.out.println("Home team name: "+ awayTeam);
-        games.add(new Game(homeTeam, awayTeam));
+        gameService.addGame(homeTeam, awayTeam);
     }
 
     public void finishGame() {
         System.out.println("Action Selected: Finish Game");
         System.out.println("Please provide id game to finish");
         int gameId = scanner.nextInt();
-        boolean gameExists = games.stream().anyMatch(r -> r.isGameInProgress() && r.getGameId() == gameId);
-        if (gameExists) {
-            Game game = games.stream().filter(r -> r.isGameInProgress() && r.getGameId() == gameId).findFirst().orElse(null);
-            if(game != null)
-                game.finishGame();
-
-            System.out.println("The game of id" +gameId+ "has ended");
-        } else {
-            System.out.println("The game with the given id does not exist");
-        }
+        gameService.finishGame(gameId);
     }
 
     public void updateScore() {
         System.out.println("Action Selected: Update Score");
         System.out.println("Select the game to update:");
         int gameIdToUpdate = scanner.nextInt();
-        boolean gameExists = games.stream().anyMatch(r -> r.isGameInProgress() && r.getGameId() == gameIdToUpdate);
+        boolean gameExists = gameService.isGameExistAndIsInProgress(gameIdToUpdate);
         if (gameExists) {
             System.out.println("Please select team to update:");
             System.out.println("1. HomeTeam");
             System.out.println("2. AwayTeam");
             int teamToUpdate = scanner.nextInt();
-            if(teamToUpdate > 0 && teamToUpdate <= 2) {
-                Game game = games.stream().filter(r -> r.isGameInProgress() && r.getGameId() == gameIdToUpdate).findFirst().orElse(null);
-                if (game != null) {
-                    if(teamToUpdate == 1) {
-                        game.addHomeTeamScore(1);
-                    } else {
-                        game.addAwayTeamScore(1);
-                    }
-                }
-            } else {
-                System.out.println("The team with the given id does not exist");
-            }
+            gameService.updateScore(gameIdToUpdate, teamToUpdate, 1);
         } else {
             System.out.println("The game with the given id does not exist");
         }
