@@ -10,6 +10,11 @@ public class GameService {
 
     public void addGame(String homeTeam, String awayTeam) {
         Game game = new Game(homeTeam, awayTeam);
+        boolean gameAlreadyExists = games.stream().anyMatch(g -> g.equals(game) && g.isGameInProgress());
+        if (gameAlreadyExists) {
+            System.out.println("Game between "+homeTeam+" and "+awayTeam+" is already in progress");
+            return;
+        }
         games.add(game);
     }
 
@@ -44,5 +49,9 @@ public class GameService {
 
     public List<Game> getGamesInProgress() {
         return games.stream().filter(Game::isGameInProgress).toList();
+    }
+
+    public List<Game> getGames() {
+        return games;
     }
 }
