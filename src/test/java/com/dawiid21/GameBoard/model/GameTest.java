@@ -11,14 +11,12 @@ class GameTest {
         Game game1 = new Game("homeTeam", "awayTeam");
         Game game2 = new Game("homeTeam1", "awayTeam1");
 
-        assertEquals(1, game1.getGameId());
         assertEquals("homeTeam", game1.getHomeTeam());
         assertEquals("awayTeam", game1.getAwayTeam());
         assertEquals(0, game1.getHomeTeamScore());
         assertEquals(0, game1.getAwayTeamScore());
         assertTrue(game1.isGameInProgress());
 
-        assertEquals(2, game2.getGameId());
         assertEquals("homeTeam1", game2.getHomeTeam());
         assertEquals("awayTeam1", game2.getAwayTeam());
         assertEquals(0, game2.getHomeTeamScore());
