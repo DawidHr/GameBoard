@@ -103,7 +103,7 @@ public class ConsoleUI {
         System.out.println("Action Selected: Get Summary Games");
         LinkedList<Game> gamesInProgress = gameService.getSummaryGames();
         for (Game game : gamesInProgress) {
-            System.out.println("id: " + game.getGameId() + ". " + game.getHomeTeam() + " - " + game.getAwayTeam() + ": " + game.getHomeTeamScore() + "-" + game.getAwayTeamScore());
+            System.out.println("id: " + game.getGameId() + ". " + game.getHomeTeam() + " " + game.getHomeTeamScore() + " - " + game.getAwayTeam() + " " + game.getAwayTeamScore());
         }
     }
 }
