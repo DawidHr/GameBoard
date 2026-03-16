@@ -17,6 +17,7 @@ public class ConsoleUI {
             showMainActionList();
             System.out.println("Select Action: ");
             int selectedAction = scanner.nextInt();
+            scanner.nextLine();
             switch (selectedAction) {
                 case 1: {
                     addGame();
@@ -59,7 +60,7 @@ public class ConsoleUI {
         System.out.println("1. Start a game");
         System.out.println("2. Finish game");
         System.out.println("3. Update score");
-        System.out.println("3. Get a summary of games by total score");
+        System.out.println("4. Get a summary of games by total score");
         System.out.println("========================================================================");
     }
 
@@ -67,10 +68,10 @@ public class ConsoleUI {
     public void addGame() {
         System.out.println("Action Selected: Add Game");
         System.out.println("Please provide home team");
-        String homeTeam = scanner.next();
+        String homeTeam = scanner.nextLine();
         System.out.println("Home team name: "+ homeTeam);
         System.out.println("Please provide away team");
-        String awayTeam = scanner.next();
+        String awayTeam = scanner.nextLine();
         System.out.println("Home team name: "+ awayTeam);
         gameService.addGame(homeTeam, awayTeam);
     }
