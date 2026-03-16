@@ -12,7 +12,7 @@ public class GameSummaryComparator implements Comparator<Game> {
         if(totalScore1 != totalScore2) {
             return Long.compare(totalScore2, totalScore1);
         } else {
-            return Long.compare(game2.getGameId(), game1.getGameId());
+            return Long.compare(game1.getGameId(), game2.getGameId());
         }
     }
 }
